@@ -1,8 +1,8 @@
 import 'phaser';
 
 export default class Piece extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, texture, frame) {
-    super(scene, x, y, texture, frame);
+  constructor(scene, x, y, texture, frame, board) {
+    super(scene, board[x][y].x, board[x][y].y, texture, frame);
     scene.add.existing(this);
 
     this.setScale(1.2);

@@ -6,5 +6,4 @@ export default class Cell extends Phaser.GameObjects.Sprite{
     scene.add.existing(this);
     this.setScale(0.3);
   }
-
 }
