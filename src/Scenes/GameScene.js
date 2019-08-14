@@ -10,6 +10,13 @@ import whiteKnight from "../assets/whiteKnight.png";
 import whitePawn from "../assets/whitePawn.png";
 import whiteRook from "../assets/whiteRook.png";
 
+import blackKing from "../assets/blackKing.png";
+import blackBishop from "../assets/blackBishop.png";
+import blackQueen from "../assets/blackQueen.png";
+import blackKnight from "../assets/blackKnight.png";
+import blackPawn from "../assets/blackPawn.png";
+import blackRook from "../assets/blackRook.png";
+
 import Board from './../Board/Board';
 import Pawn from '../Pieces/Pawn';
 import Bishop from '../Pieces/Bishop';
@@ -23,41 +30,69 @@ export default class GameScene extends Phaser.Scene {
     super('Game')
   }
   preload() {
-    this.load.image("Pawn", whitePawn)
-    this.load.image("Rook", whiteRook)
-    this.load.image("Bishop", whiteBishop)
-    this.load.image("Knight", whiteKnight)
-    this.load.image("Queen", whiteQueen)
-    this.load.image("King", whiteKing)
+    this.load.image("whitePawn", whitePawn)
+    this.load.image("whiteRook", whiteRook)
+    this.load.image("whiteBishop", whiteBishop)
+    this.load.image("whiteKnight", whiteKnight)
+    this.load.image("whiteQueen", whiteQueen)
+    this.load.image("whiteKing", whiteKing)
+
+    this.load.image("blackPawn", blackPawn)
+    this.load.image("blackRook", blackRook)
+    this.load.image("blackBishop", blackBishop)
+    this.load.image("blackKnight", blackKnight)
+    this.load.image("blackQueen", blackQueen)
+    this.load.image("blackKing", blackKing)
+
     this.load.image("whiteCell", whiteCell)
     this.load.image("blackCell", blackCell)
-
   }
 
   create() {
     var board = new Board(8, this)
 
-    var whitePawn1 = new Pawn(this, 0, 1, board)
-    var whitePawn2 = new Pawn(this, 1, 1, board)
-    var whitePawn3 = new Pawn(this, 2, 1, board)
-    var whitePawn4 = new Pawn(this, 3, 1, board)
-    var whitePawn5 = new Pawn(this, 4, 1, board)
-    var whitePawn6 = new Pawn(this, 5, 1, board)
-    var whitePawn7 = new Pawn(this, 6, 1, board)
-    var whitePawn8 = new Pawn(this, 7, 1, board)
+    var whitePawn1 = new Pawn(this, 0, 1, board, 1)
+    var whitePawn2 = new Pawn(this, 1, 1, board, 1)
+    var whitePawn3 = new Pawn(this, 2, 1, board, 1)
+    var whitePawn4 = new Pawn(this, 3, 1, board, 1)
+    var whitePawn5 = new Pawn(this, 4, 1, board, 1)
+    var whitePawn6 = new Pawn(this, 5, 1, board, 1)
+    var whitePawn7 = new Pawn(this, 6, 1, board, 1)
+    var whitePawn8 = new Pawn(this, 7, 1, board, 1)
 
-    var whiteRook1 = new Rook(this, 0, 0, board)
-    var whiteRook2 = new Rook(this, 7, 0, board)
+    var whiteRook1 = new Rook(this, 0, 0, board, 1)
+    var whiteRook2 = new Rook(this, 7, 0, board, 1)
 
-    var whiteBishop1 = new Bishop(this, 2, 0, board)
-    var whiteBishop2 = new Bishop(this, 5, 0, board)
+    var whiteBishop1 = new Bishop(this, 2, 0, board, 1)
+    var whiteBishop2 = new Bishop(this, 5, 0, board, 1)
 
-    var whiteKnight1 = new Knight(this, 1, 0, board)
-    var whiteKnight2 = new Knight(this, 6, 0, board)
+    var whiteKnight1 = new Knight(this, 1, 0, board, 1)
+    var whiteKnight2 = new Knight(this, 6, 0, board, 1)
 
-    var whiteQueen = new Queen(this, 4, 0, board)
-    var whiteKing = new King(this, 3, 0, board)
+    var whiteQueen = new Queen(this, 4, 0, board, 1)
+    var whiteKing = new King(this, 3, 0, board, 1)
 
+
+    var blackPawn1 = new Pawn(this, 0, 6, board, 0)
+    var blackPawn2 = new Pawn(this, 1, 6, board, 0)
+    var blackPawn3 = new Pawn(this, 2, 6, board, 0)
+    var blackPawn4 = new Pawn(this, 3, 6, board, 0)
+    var blackPawn5 = new Pawn(this, 4, 6, board, 0)
+    var blackPawn6 = new Pawn(this, 5, 6, board, 0)
+    var blackPawn7 = new Pawn(this, 6, 6, board, 0)
+    var blackPawn8 = new Pawn(this, 7, 6, board, 0)
+
+    var blackRook1 = new Rook(this, 0, 7, board, 0)
+    var blackRook2 = new Rook(this, 7, 7, board, 0)
+
+    var blackBishop1 = new Bishop(this, 2, 7, board, 0)
+    var blackBishop2 = new Bishop(this, 5, 7, board, 0)
+
+    var blackKnight1 = new Knight(this, 1, 7, board, 0)
+    var blackKnight2 = new Knight(this, 6, 7, board, 0)
+
+    var blackQueen = new Queen(this, 4, 7, board, 0)
+    var blackKing = new King(this, 3, 7, board, 0)
   }
 
 }
