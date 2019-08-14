@@ -13,6 +13,8 @@ export default class Piece extends Phaser.GameObjects.Sprite {
     scene.input.on('drag', this.Drag)
     scene.input.on('dragstart', this.DragStart)
     scene.input.on('dragend', this.DragEnd)
+    this.lastX = board[x][y].x;
+    this.lastY = board[x][y].y;
 
   }
 
@@ -21,11 +23,20 @@ export default class Piece extends Phaser.GameObjects.Sprite {
   }
 
   DragEnd(pointer, gameObject, dropped){
-    console.log("end")
+    if(gameObject.isCorrectCell()){
+
+    }else{
+      gameObject.x = gameObject.lastX;
+      gameObject.y = gameObject.lastY;
+    }
   }
 
   Drag(pointer, gameObject, dragX, dragY){
     gameObject.x = dragX
     gameObject.y = dragY
+  }
+
+  isCorrectCell(){
+    return false;
   }
 }
