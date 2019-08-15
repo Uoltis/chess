@@ -10,10 +10,10 @@ export default class Board extends Array {
       this[i] = new Array(n);
       for (var j = 0; j < n; j++) {
         if((i+j)%2){
-          this[i][j] = new Cell(scene, margin + cellSize * i, margin + cellSize * j, "blackCell", 1);
+          this[i][j] = new Cell(scene, margin + cellSize * i, margin + cellSize * j, "blackCell", 1, i, j);
         }
         else{
-          this[i][j] = new Cell(scene, margin + cellSize * i + step, margin + cellSize * j + step, "whiteCell", 1);
+          this[i][j] = new Cell(scene, margin + cellSize * i + step, margin + cellSize * j + step, "whiteCell", 1, i, j);
         }
       }
     }
