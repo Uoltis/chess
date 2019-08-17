@@ -11,4 +11,10 @@ export default class Pawn extends Piece {
 
     }
   }
+  isCorrectCell(x, y){
+    if(super.isCorrectCell(x, y)){
+      var {normalX, normalY} = this.transformWorldCoordToBoard(x, y)
+      
+    }
+  }
 }

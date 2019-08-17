@@ -6,7 +6,7 @@ export default class Piece extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
 
     this.setScale(1.2);
-    
+
     this.setInteractive();
     scene.input.setDraggable(this);
 
@@ -18,25 +18,37 @@ export default class Piece extends Phaser.GameObjects.Sprite {
     this.board = board;
   }
 
-  DragStart(pointer, gameObject){
+  DragStart(pointer, gameObject) {
     console.log("start")
   }
 
-  DragEnd(pointer, gameObject, dropped){
-    if(gameObject.isCorrectCell()){
+  DragEnd(pointer, gameObject, dropped) {
+    //console.log(pointer)
+    if (gameObject.isCorrectCell(pointer.upX, pointer.upY)) {
 
-    }else{
+    } else {
       gameObject.x = gameObject.lastX;
       gameObject.y = gameObject.lastY;
     }
   }
 
-  Drag(pointer, gameObject, dragX, dragY){
+  Drag(pointer, gameObject, dragX, dragY) {
     gameObject.x = dragX
     gameObject.y = dragY
   }
 
-  isCorrectCell(x, y){
-    return false;
+  isCorrectCell(x, y) {
+    var { normalX, normalY } = this.transformWorldCoordToBoard(x, y)
+    if (normalX >= 0 && normalX <= 7 && normalY >= 0 && normalY <= 7 && normalX!=-0 && normalY!=-0)
+      return true;
+    else
+      return false;
+  }
+
+  transformWorldCoordToBoard(x, y) {
+    var normalX = Math.trunc((x - 190 + 30) / 60);
+    var normalY = Math.trunc((y - 190 + 30) / 60);
+    console.log(normalX, normalY )
+    return { normalX: normalX, normalY: normalY }
   }
 }

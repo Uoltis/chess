@@ -7,5 +7,6 @@ export default class Cell extends Phaser.GameObjects.Sprite{
     this.setScale(0.3);
     this.boardX = boardX
     this.boardY = boardY
+    console.log(x, y)
   }
 }
