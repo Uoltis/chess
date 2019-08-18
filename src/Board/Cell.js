@@ -7,6 +7,24 @@ export default class Cell extends Phaser.GameObjects.Sprite{
     this.setScale(0.3);
     this.boardX = boardX
     this.boardY = boardY
-    console.log(x, y)
+    this.piece = null;
+    this.active = false;
+  }
+  setActiveColor(){
+    this.tint = 0x008000;
+    this.active = true;
+  }
+  clearColor(){
+    this.tint = 0xFFFFFF;
+    this.active = false;
+
+  }
+  isActive(){
+    if(this.active){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }

@@ -51,48 +51,48 @@ export default class GameScene extends Phaser.Scene {
   create() {
     var board = new Board(8, this)
 
-    var whitePawn1 = new Pawn(this, 0, 1, board, 1)
-    var whitePawn2 = new Pawn(this, 1, 1, board, 1)
-    var whitePawn3 = new Pawn(this, 2, 1, board, 1)
-    var whitePawn4 = new Pawn(this, 3, 1, board, 1)
-    var whitePawn5 = new Pawn(this, 4, 1, board, 1)
-    var whitePawn6 = new Pawn(this, 5, 1, board, 1)
-    var whitePawn7 = new Pawn(this, 6, 1, board, 1)
-    var whitePawn8 = new Pawn(this, 7, 1, board, 1)
+    var whitePawn1 = new Pawn(this, 1, 2, board, 1)
+    var whitePawn2 = new Pawn(this, 2, 2, board, 1)
+    var whitePawn3 = new Pawn(this, 3, 2, board, 1)
+    var whitePawn4 = new Pawn(this, 4, 2, board, 1)
+    var whitePawn5 = new Pawn(this, 5, 2, board, 1)
+    var whitePawn6 = new Pawn(this, 6, 2, board, 1)
+    var whitePawn7 = new Pawn(this, 7, 2, board, 1)
+    var whitePawn8 = new Pawn(this, 8, 2, board, 1)
 
-    var whiteRook1 = new Rook(this, 0, 0, board, 1)
-    var whiteRook2 = new Rook(this, 7, 0, board, 1)
+    var whiteRook1 = new Rook(this, 1, 1, board, 1)
+    var whiteRook2 = new Rook(this, 8, 1, board, 1)
 
-    var whiteBishop1 = new Bishop(this, 2, 0, board, 1)
-    var whiteBishop2 = new Bishop(this, 5, 0, board, 1)
+    var whiteBishop1 = new Bishop(this, 3, 1, board, 1)
+    var whiteBishop2 = new Bishop(this, 6, 1, board, 1)
 
-    var whiteKnight1 = new Knight(this, 1, 0, board, 1)
-    var whiteKnight2 = new Knight(this, 6, 0, board, 1)
+    var whiteKnight1 = new Knight(this, 2, 1, board, 1)
+    var whiteKnight2 = new Knight(this, 7, 1, board, 1)
 
-    var whiteQueen = new Queen(this, 4, 0, board, 1)
-    var whiteKing = new King(this, 3, 0, board, 1)
+    var whiteQueen = new Queen(this, 5, 1, board, 1)
+    var whiteKing = new King(this, 4, 1, board, 1)
 
 
-    var blackPawn1 = new Pawn(this, 0, 6, board, 0)
-    var blackPawn2 = new Pawn(this, 1, 6, board, 0)
-    var blackPawn3 = new Pawn(this, 2, 6, board, 0)
-    var blackPawn4 = new Pawn(this, 3, 6, board, 0)
-    var blackPawn5 = new Pawn(this, 4, 6, board, 0)
-    var blackPawn6 = new Pawn(this, 5, 6, board, 0)
-    var blackPawn7 = new Pawn(this, 6, 6, board, 0)
-    var blackPawn8 = new Pawn(this, 7, 6, board, 0)
+    var blackPawn1 = new Pawn(this, 1, 7, board, 0)
+    var blackPawn2 = new Pawn(this, 2, 7, board, 0)
+    var blackPawn3 = new Pawn(this, 3, 7, board, 0)
+    var blackPawn4 = new Pawn(this, 4, 7, board, 0)
+    var blackPawn5 = new Pawn(this, 5, 7, board, 0)
+    var blackPawn6 = new Pawn(this, 6, 7, board, 0)
+    var blackPawn7 = new Pawn(this, 7, 7, board, 0)
+    var blackPawn8 = new Pawn(this, 8, 7, board, 0)
 
-    var blackRook1 = new Rook(this, 0, 7, board, 0)
-    var blackRook2 = new Rook(this, 7, 7, board, 0)
+    var blackRook1 = new Rook(this, 1, 8, board, 0)
+    var blackRook2 = new Rook(this, 8, 8, board, 0)
 
-    var blackBishop1 = new Bishop(this, 2, 7, board, 0)
-    var blackBishop2 = new Bishop(this, 5, 7, board, 0)
+    var blackBishop1 = new Bishop(this, 3, 8, board, 0)
+    var blackBishop2 = new Bishop(this, 6, 8, board, 0)
 
-    var blackKnight1 = new Knight(this, 1, 7, board, 0)
-    var blackKnight2 = new Knight(this, 6, 7, board, 0)
+    var blackKnight1 = new Knight(this, 2, 8, board, 0)
+    var blackKnight2 = new Knight(this, 7, 8, board, 0)
 
-    var blackQueen = new Queen(this, 4, 7, board, 0)
-    var blackKing = new King(this, 3, 7, board, 0)
+    var blackQueen = new Queen(this, 5, 8, board, 0)
+    var blackKing = new King(this, 4, 8, board, 0)
   }
 
 }
