@@ -2,7 +2,7 @@ import 'phaser';
 
 export default class Piece extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, texture, frame, board) {
-    super(scene, board[x - 1][y - 1].x, board[x - 1][y - 1].y, texture, frame);
+    super(scene, board[x][y].x, board[x][y].y, texture, frame);
     scene.add.existing(this);
 
     this.setScale(1.2);
@@ -13,12 +13,13 @@ export default class Piece extends Phaser.GameObjects.Sprite {
     scene.input.on('drag', this.Drag)
     scene.input.on('dragstart', this.DragStart)
     scene.input.on('dragend', this.DragEnd)
-    this.lastX = board[x - 1][y - 1].x;
-    this.lastY = board[x - 1][y - 1].y;
+    this.lastX = board[x][y].x;
+    this.lastY = board[x][y].y;
     this.boardX = x;
     this.boardY = y;
     this.board = board;
     this.side = null;
+    this.board[x][y].piece = this;
   }
 
   DragStart(pointer, gameObject) {
@@ -27,15 +28,14 @@ export default class Piece extends Phaser.GameObjects.Sprite {
 
   DragEnd(pointer, gameObject, dropped) {
     if (gameObject.isCorrectCell(pointer.upX, pointer.upY)) {
-      var {normalX,normalY} = gameObject.transformWorldCoordToBoard(pointer.upX, pointer.upY);
-      gameObject.board[gameObject.boardX-1][gameObject.boardY-1].piece = null
-      gameObject.lastX = gameObject.board[normalX-1][normalY-1].x;
-      gameObject.lastY = gameObject.board[normalX-1][normalY-1].y
+      var { normalX, normalY } = gameObject.transformWorldCoordToBoard(pointer.upX, pointer.upY);
+      gameObject.board[gameObject.boardX][gameObject.boardY].piece = null
+      gameObject.lastX = gameObject.board[normalX][normalY].x;
+      gameObject.lastY = gameObject.board[normalX][normalY].y
       gameObject.boardX = normalX;
       gameObject.boardY = normalY;
-      gameObject.board[normalX-1][normalY-1].piece=gameObject;
-
-    } 
+      gameObject.board[normalX][normalY].piece = gameObject;
+    }
     else {
       gameObject.x = gameObject.lastX;
       gameObject.y = gameObject.lastY;
@@ -50,9 +50,9 @@ export default class Piece extends Phaser.GameObjects.Sprite {
 
   isCorrectCell(x, y) {
     var { normalX, normalY } = this.transformWorldCoordToBoard(x, y)
-    if (normalX >= 1 && normalX <= 8 && normalY >= 1 && normalY <= 8){
-      if(this.board[normalX-1][normalY-1].isActive())
-        return true;     
+    if (normalX >= 0 && normalX <= 7 && normalY >= 0 && normalY <= 7) {
+      if (this.board[normalX][normalY].isActive())
+        return true;
     }
     return false;
   }
@@ -62,34 +62,33 @@ export default class Piece extends Phaser.GameObjects.Sprite {
     var yy = (y - 190 + 30) / 60;
     var normalX = 0;
     var normalY = 0;
-    if(xx>0 && yy > 0){
-      normalX = Math.trunc(xx) + 1;
-      normalY = Math.trunc(yy) + 1;
+    if (xx > 0 && yy > 0) {
+      normalX = Math.trunc(xx);
+      normalY = Math.trunc(yy);
     }
     return { normalX: normalX, normalY: normalY }
   }
 
-  showCorrectCell(){
+  showCorrectCell() {
 
   }
-  myCorrectMove(){
-    
-  }
-  enemyCorrectMove(){
+  myCorrectMove() {
 
   }
-  isAlly(x,y){
-    if(this.board[x-1][y-1].piece.side==this.side){
+  enemyCorrectMove() {
+
+  }
+  isAlly(x, y) {
+    if (this.board[x][y].piece.side == this.side) {
       return true
     }
     return false
   }
-  isPiece(x,y){
-    console.log(x,y);
-    console.log(this.board)
-    if(this.board[x-1][y-1].piece!==null){
-      return true
+  isPiece(x, y) {
+    if (this.board[x][y].piece) {
+      return true;
+    } else {
+      return false;
     }
-    return false
   }
 }
