@@ -29,7 +29,10 @@ export default class Pawn extends Piece {
       }
     }
 
-    if(this.isPiece(x + 1, y + 1 * sideVert)){
+    if((x+1)<=7 && (y+1)<=7 && this.isPiece(x + 1, y + 1 * sideVert)){
+      this.board[x + 1][y + 1 * sideVert].setActiveColor();
+    }
+    if((x-1)<=7 && (y+1)<=7 && this.isPiece(x - 1, y + 1 * sideVert)){
       this.board[x + 1][y + 1 * sideVert].setActiveColor();
     }
   }

@@ -10,5 +10,6 @@ export default class Queen extends Piece {
       super(scene, x, y, 'blackQueen', 1, board);
 
     }
+    this.side = side;
   }
 }

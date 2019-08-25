@@ -10,5 +10,6 @@ export default class Knight extends Piece {
       super(scene, x, y, 'blackKnight', 1, board);
 
     }
+    this.side = side;
   }
 }
