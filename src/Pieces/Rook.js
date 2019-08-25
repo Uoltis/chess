@@ -26,7 +26,6 @@ export default class Rook extends Piece {
       }
       this.board[i][y].setActiveColor();
     }
-debugger
     // left
     for(var i = x-1; i>=0; i--){
       if(this.isPiece(i, y)){

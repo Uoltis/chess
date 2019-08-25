@@ -12,4 +12,8 @@ export default class King extends Piece {
     }
     this.side = side;
   }
+
+  showCorrectCell(){
+    
+  }
 }
