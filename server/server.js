@@ -1,13 +1,23 @@
-var express = require('express');
-var app = express();
-var server = require('http').Server(app);
+var app = require('express')();
+var express = require('express')
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+const path = require('path');
 
-app.use(express.static(__dirname + '../'));
+var port = process.env.PORT || 3000;
 
-app.get('/', function (req, res) {
+app.use('/',express.static(path.join(__dirname, '')));
+
+app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-server.listen(8081, function () {
-  console.log(`Listening on ${server.address().port}`);
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', "server side:" + msg);
+  });
+});
+
+http.listen(port, function(){
+  console.log('listening on *:' + port);
 });

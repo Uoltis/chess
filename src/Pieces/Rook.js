@@ -2,12 +2,12 @@ import 'phaser';
 import Piece from './Piece';
 
 export default class Rook extends Piece {
-  constructor(scene, x, y, board, side) {
+  constructor(scene, x, y, board, side, socket) {
     if(side){
-      super(scene, x, y, 'whiteRook', 1, board);
+      super(scene, x, y, 'whiteRook', 1, board, socket);
     }
     else{
-      super(scene, x, y, 'blackRook', 1, board);
+      super(scene, x, y, 'blackRook', 1, board, socket);
 
     }
     this.side = side;

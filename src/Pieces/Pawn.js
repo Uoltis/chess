@@ -2,12 +2,12 @@ import 'phaser';
 import Piece from './Piece';
 
 export default class Pawn extends Piece {
-  constructor(scene, x, y, board, side) {
+  constructor(scene, x, y, board, side, socket) {
     if (side) {
-      super(scene, x, y, 'whitePawn', 1, board);
+      super(scene, x, y, 'whitePawn', 1, board, socket);
     }
     else {
-      super(scene, x, y, 'blackPawn', 1, board);
+      super(scene, x, y, 'blackPawn', 1, board, socket);
     }
     this.side = side;
   }
@@ -30,10 +30,14 @@ export default class Pawn extends Piece {
     }
 
     if((x+1)<=7 && (y+1)<=7 && this.isPiece(x + 1, y + 1 * sideVert)){
-      this.board[x + 1][y + 1 * sideVert].setActiveColor();
+      if(!this.isAlly(x+1,y+1)){
+        this.board[x + 1][y + 1 * sideVert].setActiveColor();
+      }
     }
     if((x-1)<=7 && (y+1)<=7 && this.isPiece(x - 1, y + 1 * sideVert)){
-      this.board[x + 1][y + 1 * sideVert].setActiveColor();
+      if(!this.isAlly(x+1,y+1)){
+        this.board[x - 1][y + 1 * sideVert].setActiveColor();
+      }      
     }
   }
 }

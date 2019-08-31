@@ -2,12 +2,12 @@ import 'phaser';
 import Piece from './Piece';
 
 export default class Bishop extends Piece {
-  constructor(scene, x, y, board, side) {
+  constructor(scene, x, y, board, side, socket) {
     if (side) {
-      super(scene, x, y, 'whiteBishop', 1, board);
+      super(scene, x, y, 'whiteBishop', 1, board, socket);
     }
     else {
-      super(scene, x, y, 'blackBishop', 1, board);
+      super(scene, x, y, 'blackBishop', 1, board, socket);
 
     }
     this.side = side;

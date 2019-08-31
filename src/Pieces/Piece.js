@@ -1,7 +1,7 @@
 import 'phaser';
 
 export default class Piece extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, texture, frame, board) {
+  constructor(scene, x, y, texture, frame, board, socket) {
     super(scene, board[x][y].x, board[x][y].y, texture, frame);
     scene.add.existing(this);
 
@@ -20,6 +20,7 @@ export default class Piece extends Phaser.GameObjects.Sprite {
     this.board = board;
     this.side = null;
     this.board[x][y].piece = this;
+    this.socket = socket;
   }
 
   DragStart(pointer, gameObject) {
@@ -28,13 +29,8 @@ export default class Piece extends Phaser.GameObjects.Sprite {
 
   DragEnd(pointer, gameObject, dropped) {
     if (gameObject.isCorrectCell(pointer.upX, pointer.upY)) {
-      var { normalX, normalY } = gameObject.transformWorldCoordToBoard(pointer.upX, pointer.upY);
-      gameObject.board[gameObject.boardX][gameObject.boardY].piece = null
-      gameObject.lastX = gameObject.board[normalX][normalY].x;
-      gameObject.lastY = gameObject.board[normalX][normalY].y
-      gameObject.boardX = normalX;
-      gameObject.boardY = normalY;
-      gameObject.board[normalX][normalY].piece = gameObject;
+      gameObject.correctMoveEnding(gameObject);
+      gameObject.sendMoveToServer();
     }
     else {
       gameObject.x = gameObject.lastX;
@@ -46,6 +42,16 @@ export default class Piece extends Phaser.GameObjects.Sprite {
   Drag(pointer, gameObject, dragX, dragY) {
     gameObject.x = dragX
     gameObject.y = dragY
+  }
+
+  correctMoveEnding(){
+    var { normalX, normalY } = this.transformWorldCoordToBoard(pointer.upX, pointer.upY);
+    this.board[this.boardX][this.boardY].piece = null
+    this.lastX = this.board[normalX][normalY].x;
+    this.lastY = this.board[normalX][normalY].y
+    this.boardX = normalX;
+    this.boardY = normalY;
+    this.board[normalX][normalY].piece = this;
   }
 
   isCorrectCell(x, y) {
@@ -90,5 +96,8 @@ export default class Piece extends Phaser.GameObjects.Sprite {
     } else {
       return false;
     }
+  }
+  sendMoveToServer(){
+    this.socket.emit('chat message', 'hy from web')
   }
 }
