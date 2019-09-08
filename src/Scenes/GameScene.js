@@ -51,8 +51,12 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     var board = new Board(8, this)
+    window.board = board;
     var socket = io();
-    socket.on('chat message',msg => console.log(msg));
+    socket.on('chat message',moveObj => {
+      var {xL, yL, xN, yN} = moveObj;
+      board[xL][yL].piece.correctMoveEnding(xN, yN)
+    });
 
     var whitePawn1 = new Pawn(this, 0, 1, board, 1, socket)
     var whitePawn2 = new Pawn(this, 1, 1, board, 1, socket)

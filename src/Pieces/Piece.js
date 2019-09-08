@@ -28,9 +28,10 @@ export default class Piece extends Phaser.GameObjects.Sprite {
   }
 
   DragEnd(pointer, gameObject, dropped) {
-    if (gameObject.isCorrectCell(pointer.upX, pointer.upY)) {
-      gameObject.correctMoveEnding(gameObject);
-      gameObject.sendMoveToServer();
+    var { normalX, normalY } = gameObject.transformWorldCoordToBoard(pointer.upX, pointer.upY);
+    if (gameObject.isCorrectCell(normalX, normalY)) {
+      gameObject.sendMoveToServer(normalX, normalY);
+      gameObject.correctMoveEnding(normalX, normalY);
     }
     else {
       gameObject.x = gameObject.lastX;
@@ -44,20 +45,20 @@ export default class Piece extends Phaser.GameObjects.Sprite {
     gameObject.y = dragY
   }
 
-  correctMoveEnding(){
-    var { normalX, normalY } = this.transformWorldCoordToBoard(pointer.upX, pointer.upY);
+  correctMoveEnding(x, y) {
+    this.lastX = this.board[x][y].x;
+    this.lastY = this.board[x][y].y
+    this.x = this.board[x][y].x;
+    this.y = this.board[x][y].y
     this.board[this.boardX][this.boardY].piece = null
-    this.lastX = this.board[normalX][normalY].x;
-    this.lastY = this.board[normalX][normalY].y
-    this.boardX = normalX;
-    this.boardY = normalY;
-    this.board[normalX][normalY].piece = this;
+    this.boardX = x;
+    this.boardY = y;
+    this.board[x][y].piece = this;
   }
 
   isCorrectCell(x, y) {
-    var { normalX, normalY } = this.transformWorldCoordToBoard(x, y)
-    if (normalX >= 0 && normalX <= 7 && normalY >= 0 && normalY <= 7) {
-      if (this.board[normalX][normalY].isActive())
+    if (x >= 0 && x <= 7 && y >= 0 && y <= 7) {
+      if (this.board[x][y].isActive())
         return true;
     }
     return false;
@@ -97,7 +98,7 @@ export default class Piece extends Phaser.GameObjects.Sprite {
       return false;
     }
   }
-  sendMoveToServer(){
-    this.socket.emit('chat message', 'hy from web')
+  sendMoveToServer(x, y) {
+    this.socket.emit('chat message', { xL: this.boardX, yL: this.boardY, xN: x, yN: y })
   }
 }
